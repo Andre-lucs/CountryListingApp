@@ -36,7 +36,7 @@ res.send(countryData);
 
 if (!module.parent) {
   app.listen(PORT);
-  console.log('Express started on port 3000');
+  console.log('Express started on port '+PORT);
 }
 
 async function fetchPopulationData(countryName) {

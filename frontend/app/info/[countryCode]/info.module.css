@@ -1,0 +1,69 @@
+/* info.module.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+  
+  .flagContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .section h2 {
+    font-size: 1.8rem;
+    color: #a3a3a3;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .borderCountriesList {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .borderCountriesList li {
+    padding: 10px;
+    font-size: 1.1rem;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    transition: 0.3s ease;
+    font-weight: bold;
+    color: #08016b;
+  }
+  
+  .borderCountriesList li:hover {
+    background-color: #f0f0f0;
+    scale: 1.01;
+    color: #0c00f5;
+  }
+  
+  .link {
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+  
+  
+  .loading {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 50px;
+    color: #666;
+  }
+  
