@@ -1,16 +1,18 @@
+const { default: axios } = require('axios');
 var express = require('express');
 var app = module.exports = express()
 
 const PORT = 3000;
 
 app.get('/api/available-countries', async (req, res) => {
-  res.send({
-    countries: [
-      { name: 'United States', code: 'US' },
-      { name: 'Canada', code: 'CA' },
-      { name: 'Mexico', code: 'MX' }
-    ]
-  });
+  try{
+    const response = await axios.get('https://date.nager.at/api/v3/AvailableCountries');
+    const countries = response.data;
+    res.send({ countries });
+  }catch(e){
+    console.error("Error fetching countries : "+e);
+    res.status(500).send('Could not fetch countries');
+  }
 });
 
 app.get('/api/country-info/:countryCode', async (req, res) => {
