@@ -16,21 +16,46 @@ app.get('/api/available-countries', async (req, res) => {
 });
 
 app.get('/api/country-info/:countryCode', async (req, res) => {
-  if (req.params.countryCode === 'US') {
-    res.send({
-      name: 'United States',
-      code: 'US',
-      continent: 'North America',
-      population: 327000000,
-      currency: 'USD'
-    });
-    return;
-  }
-  res.status(404).send('Country not found');
+
+let countryCode = req.params.countryCode;
+let countryData = {};
+try{
+  const response = await axios.get(`https://date.nager.at/api/v3/CountryInfo/${countryCode}`);
+  countryData = response.data;  
+}catch(e){
+  console.error("Error fetching country data : "+e);
+  res.status(500).send('Could not fetch country data');
+  return;
+}
+countryData.populationData = await fetchPopulationData(countryData.commonName);
+countryData.flagUrl = await fetchFlagUrl(countryCode);
+
+res.send(countryData);
+
 });
 
-/* istanbul ignore next */
 if (!module.parent) {
   app.listen(PORT);
   console.log('Express started on port 3000');
+}
+
+async function fetchPopulationData(countryName) {
+  const response = await axios.get(`https://countriesnow.space/api/v0.1/countries/population`);
+  const populationData = response.data.data;
+  let population = populationData.find(data => data.country === countryName);
+  if(!population){
+    return null;
+  }
+  return population.populationCounts;
+
+}
+
+async function fetchFlagUrl(countryCode) {
+  const response = await axios.get(`https://countriesnow.space/api/v0.1/countries/flag/images`);
+  const flagData = response.data.data;
+  let countryFlag = flagData.find(country => country.iso2 === countryCode);
+  if(!countryFlag){
+    return null;
+  }
+  return countryFlag.flag;
 }
