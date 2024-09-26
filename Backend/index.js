@@ -2,7 +2,7 @@ const { default: axios } = require('axios');
 var express = require('express');
 var app = module.exports = express()
 
-const PORT = 3000;
+const PORT = 3030;
 
 app.get('/api/available-countries', async (req, res) => {
   try{
